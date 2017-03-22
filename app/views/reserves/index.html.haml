@@ -1,0 +1,25 @@
+- if @reserve.present?
+  %table.table.table-hover
+    %thead
+      %tr
+        %td Room
+        %td Capacity
+        %td Company
+        %td Duration
+        %td Time Start
+        %td Total Price
+        %td Date Reserved
+        %td Reserved by
+    %tbody
+    - @reserve.each do |r|
+      %tr
+        %td.col-md-1= r[:room]
+        %td.col-md-1= r[:capacity]
+        %td.col-md-1= r[:company]
+        %td.col-md-1= r[:duration]
+        %td.col-md-1= r[:time_start]
+        %td.col-md-1= number_format(hourly_rate(r[:rate],r[:duration]))
+        %td.col-md-1= r[:reserve_date]
+        %td.col-md-1= r[:name]
+- else
+  %h1 No Data

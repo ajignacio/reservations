@@ -1,0 +1,15 @@
+.jumbotron
+  .row
+    .col-md-12
+      = form_tag '/', remote: true, method: :get do
+        = label_tag :capacity
+        = text_field_tag :capacity
+        = label_tag :date
+        = text_field_tag :date
+        = label_tag :duration
+        = text_field_tag :duration
+        = label_tag :time_start
+        = text_field_tag :time_start
+        = submit_tag "Search"
+
+#rooms= render 'available_room'

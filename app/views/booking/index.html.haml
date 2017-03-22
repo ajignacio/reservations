@@ -1,0 +1,53 @@
+.jumbotron
+  .row
+    .col-md-6
+      .box-header.with-border
+        %h3.box-title
+          Booking Details
+      .box-body
+        .font-group
+          %label Room:
+          ="#{@book.name}"
+        .font-group
+          %label Rate per hour
+          ="#{number_format(@book.rate_per_hour)}"
+        .font-group
+          %label Capacity
+          ="#{@book.capacity}"
+        .font-group
+          %label Date:
+          = "#{@date}"
+        .font-group
+          %label Duration:
+          = "#{@duration}"
+        .font-group
+          %label Total Price:
+          = number_format(hourly_rate(@book.rate_per_hour,@duration))
+    .col-md-6
+      .box-header.with-border
+        - if flash[:alert].present?
+          %h2= "#{pluralize(flash[:alert].count, 'Error')}"
+          %ul
+            - flash[:alert].each do |msg|
+              %li= msg
+        %h3.box-title
+          Your Information
+      .box-body
+        = form_tag build_reservation_path do
+          = hidden_field_tag :rid, "#{@book.id}"
+          = hidden_field_tag :date, @date
+          = hidden_field_tag :duration, @duration
+          = hidden_field_tag :time_start, @time_start
+          .form-group
+            %label First Name:
+            = text_field_tag :first_name, nil, class: "form-control"
+          .form-group
+            %label Last Name:
+            = text_field_tag :last_name, nil, class: "form-control"
+          .form-group
+            %label Company:
+            = text_field_tag :company, nil, class: "form-control"
+          .form-group
+            %label Email:
+            = text_field_tag :email, nil, class: "form-control"
+          %br= submit_tag 'Reserve', class: "btn btn-primary pull-right"

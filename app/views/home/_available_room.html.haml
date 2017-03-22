@@ -1,0 +1,18 @@
+- if @room.present?
+  %table.table.table-hover
+    %thead
+      %tr
+        %td Room
+        %td Capacity
+        %td Rate Per Hour
+        %td Occupied/Available
+    %tbody
+    - @room.each do |r|
+      %tr
+        %td.col-md-1= r[:name]
+        %td.col-md-1= r[:capacity]
+        %td.col-md-1= number_format(r[:rate])
+        %td.col-md-1= r[:available]
+        %td.col-md-1= link_to "Book Now", booking_index_path(book: r[:id], date: @date, duration: @duration, time_start: @time_start), class: "btn btn-primary"
+- else
+  %h1 No Data

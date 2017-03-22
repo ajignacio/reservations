@@ -1,0 +1,30 @@
+.jumbotron
+  .row
+    .col-md-12
+
+      = form_tag '/', remote: true, method: :get do
+        .form-group
+          = label_tag :capacity
+          = text_field_tag :capacity,nil
+
+          = label_tag :date
+          = text_field_tag :date, @date , class:'datepicker'
+
+          = label_tag :duration
+          = select_tag :duration, options_for_select(select_hour)
+
+          = label_tag :time_start
+          = select_tag :time_start, options_for_select(select_time_to_start)          
+
+          = submit_tag "Search", class: "btn btn-primary "
+- if flash[:success].present?
+  %h2= flash[:success]
+#rooms= render 'available_room'
+
+:javascript
+  $(".datepicker").datepicker(
+    {
+      startDate: '-0d',
+      dateFormat: 'dd/mm/yy'
+    }
+  );
